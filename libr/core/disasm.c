@@ -3908,14 +3908,12 @@ static bool data_type_tostring(char *out, size_t outsz, const ut8 *obuf, int ib,
 	}
 	char bits[(sizeof (ut64) * 8) + 1];
 	switch (ib) {
-	case 1: {
+	case 1:
 		// most significant byte first, so the digits show the value as in the other bases
-		ut8 msb[sizeof (ut64)];
-		r_write_ble (msb, n, true, size * 8);
-		r_str_bits (bits, msb, size * 8, NULL);
+		r_write_ble (buf, n, true, size * 8);
+		r_str_bits (bits, buf, size * 8, NULL);
 		snprintf (out, outsz, "%s %sb", type, bits);
 		break;
-	}
 	case 3:
 		snprintf (out, outsz, "%s %d", type, ntohs (n & 0xFFFF));
 		break;
